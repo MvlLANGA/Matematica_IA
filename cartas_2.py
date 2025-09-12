@@ -16,7 +16,7 @@ cartas_copas = [
     carta for carta in simulacoes
     if carta in ("3_copas", "4_copas", "5_copas")
     ]
-
+# Posso aqui tambem criar uma variavel pra cada um no final somar e colocar pra simular
 
 # Calcula a probabilidade experimental (frequência relativa)
 prob = len(cartas_copas) / len(simulacoes)

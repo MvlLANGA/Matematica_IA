@@ -12,10 +12,14 @@ baralho = ['A_copas','2_copas','3_copas','4_copas','5_copas','6_copas','7_copas'
 simulacoes = [random.choice(baralho) for _ in range(10000)]
 
 # Filtra apenas as cartas de copas
-cartas_copas = [carta for carta in simulacoes if "copas" in carta ]
+#cartas_copas = [carta for carta in simulacoes if "copas" in carta ]
+cartas=[
+    carta for carta in simulacoes
+    if carta.startswith("8_" or "9_")]
+#O método startswith() é usado para verificar se uma string começa com um determinado prefixo. Ele retorna True ou False.
 
 # Calcula a probabilidade experimental (frequência relativa)
-prob = len(cartas_copas) / len(simulacoes)
+prob = len(cartas) / len(simulacoes)
 
 # Exibe o resultado
 print("A probabilidade é:", prob)
