@@ -1,6 +1,6 @@
 import numpy as np
 
-# ---------------- CONFIGURAÇÃO ----------------
+# CONFIGURAÇÃO 
 # Temos uma urna com 5 bolas: 3 vermelhas (R) e 2 azuis (B)
 bolas = ['R','R','R','B','B']
 
@@ -10,7 +10,7 @@ n_sim = 10000
 # Lista para armazenar os resultados de cada sorteio
 resultados = []
 
-# ---------------- SIMULAÇÃO ----------------
+# SIMULAÇÃO 
 for _ in range(n_sim):
     # Embaralha as bolas
     np.random.shuffle(bolas)
@@ -21,7 +21,7 @@ for _ in range(n_sim):
 # Converte resultados para um array NumPy para facilitar operações
 resultados = np.array(resultados)
 
-# ---------------- EVENTOS ----------------
+# EVENTOS
 # Evento A: a bola sorteada é vermelha (R)
 A = resultados == 'R'
 
@@ -30,7 +30,7 @@ A = resultados == 'R'
 # "% 2 == 1" marca os índices ímpares como True
 B = np.arange(n_sim) % 2 == 1
 
-# ---------------- PROBABILIDADE ----------------
+# PROBABILIDADE 
 # A | B significa "A OU B" (ocorre A ou ocorre B)
 # np.mean() calcula a proporção de vezes em que isso é verdadeiro
 P_sim = np.mean(A | B)
