@@ -12,6 +12,7 @@ print("A media é: ", statistics.mean(numeros))
 print("A mediana é: ", statistics.median(numeros))
 print("A moda é: ", statistics.multimode(numeros))
 
+# frequencia = {x:numeros.count(x) for x in set(numeros)}
 frequencia =Counter(numeros)
 print("Frequencia: ",frequencia)
 
