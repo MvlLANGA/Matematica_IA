@@ -9,7 +9,7 @@ numeros = np.random.normal(loc=50, scale=10, size=100)
 # bins=10 define 10 faixas (intervalos) no histograma
 # color='orange' define a cor das barras
 # edgecolor='black' adiciona contorno preto nas barras
-plt.hist(numeros, bins=10, color='orange', edgecolor='black')
+plt.hist(numeros, bins=10, color='brown', edgecolor='black')
 
 # 3. Adicionar título e rótulos aos eixos
 plt.title('Histograma de Números Aleatórios')  # Título do gráfico
