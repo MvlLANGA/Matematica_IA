@@ -46,6 +46,17 @@ df_sorted['MA7']= df_sorted['Receita Total'].rolling(7).mean() #sorted seleciona
 #O mean calcula a média desses 7 dias dentro de uma janela. 
 print(df_sorted)
 
+#Produto mais vendido por Região
+# Agrupa por Região e Produto, somando as vendas
+vendas_agrupadas = df.groupby(['Região', 'Produto'])['Vendas'].sum().reset_index() # o Reset_index ele organiza a tabela.
+print(vendas_agrupadas)
+
+# Para cada região, pega o produto com maior venda
+produto_mais_vendido = vendas_agrupadas.sort_values('Vendas', ascending=False).drop_duplicates('Região')
+
+print(produto_mais_vendido)
+
+
 #Visualização em graficos.
 
 #Histograma
