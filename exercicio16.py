@@ -30,8 +30,24 @@ print(registros_produtos)
 #Calculando a receita média por regiao
 print(df.groupby("Produto")["Receita Total"].mean())
 
+#Fazendo a criação de uma nova coluna (mês)
+df['Mes']= df['Data'].dt.to_period('M') #O 'M' vem do ingles Mounth
+print(df.head())
 
-#Visualizando
+#Total de vendas por mes
+vendas_mes= df.groupby('Mes')['Vendas'].sum()
+print("\n--Vendas por Mes--")
+print(vendas_mes)
+
+#calculando a média movel
+# Média móvel com janela de 7 períodos
+df_sorted = df.sort_values("Data")
+df_sorted['MA7']= df_sorted['Receita Total'].rolling(7).mean() #sorted seleciona a coluna dos valores da "Receita total". O rolling cria uma janela móvel de 7 linhas consecutivas(no caso 7 dias aqui)
+#O mean calcula a média desses 7 dias dentro de uma janela. 
+print(df_sorted)
+
+#Visualização em graficos.
+
 #Histograma
 plt.figure()
 sns.histplot(df["Vendas"], kde=True, bins=10, color='green')
@@ -59,6 +75,22 @@ plt.show(block=False)
 plt.figure()
 sns.heatmap(df[["Vendas", "Preço Unitário", "Receita Total"]].corr(), annot=True, cmap="coolwarm")
 plt.title("Mapa de correlação")
+plt.show(block=False)
+
+#Total de vendas por mes.
+plt.figure(figsize=(7,4))
+vendas_mes.plot(kind='line', marker='o')
+plt.title("Total de vendas por mes")
+plt.xlabel("Dias")
+plt.ylabel("Media")
+plt.show(block=False)
+
+#Média movel de 7 dias
+plt.figure(figsize=(10,5))
+plt.plot(df_sorted["Data"], df_sorted["Receita Total"], color="darkgreen", alpha=0.8, label="Receita Diaria")
+plt.plot(df_sorted["Data"], df_sorted["MA7"], color="orange", label= "Media movel 7 dias")
+plt.legend()
+plt.title("Receita Total com média movel(7d)")
 plt.show(block=False)
 
 input("Pressione Enter para fechar tudo...")
