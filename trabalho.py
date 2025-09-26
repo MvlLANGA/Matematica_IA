@@ -106,9 +106,3 @@ plt.figure()
 sns.heatmap(df[["Passageiros", "Distância (km)", "Ocupação (%)", "Receita (R$)"]].corr(), annot=True, cmap="coolwarm")
 plt.title("Mapa entre variaveis")
 plt.show()
-
-
-
-
-
-
