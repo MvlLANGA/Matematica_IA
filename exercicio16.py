@@ -56,7 +56,6 @@ produto_mais_vendido = vendas_agrupadas.sort_values('Vendas', ascending=False).d
 
 print(produto_mais_vendido)
 
-
 #Visualização em graficos.
 
 #Histograma
