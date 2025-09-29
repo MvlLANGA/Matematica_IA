@@ -79,7 +79,40 @@ print("-"*30)
 
 voos_por_aeroporto = df['Aeroporto Origem'].value_counts().reset_index()
 voos_por_aeroporto.columns = ['Aeroporto Origem', 'Quantidade de Voos']
-print(voos_por_aeroporto.head(10))  
+print(voos_por_aeroporto.head(10))
+
+df['Data'] = pd.to_datetime(df['Data'])
+df['Mês'] = df['Data'].dt.to_period('M').astype(str)
+receita_media_mes = df.groupby('Mês')['Receita (R$)'].mean().reset_index()
+receita_media_mes.rename(columns={'Receita (R$)': 'Receita Média (R$)'}, inplace=True)
+
+print("---Receita média por mês---")
+print(receita_media_mes)
+print("-" * 30)
+
+
+ocupacao_media = df.groupby('Companhia')['Ocupação (%)'].mean().reset_index()
+ocupacao_media.rename(columns={'Ocupação (%)': 'Ocupação Média (%)'}, inplace=True)
+print("---Ocupação média por companhia---")
+print(ocupacao_media)
+print("-" * 30)
+
+
+df['Rota'] = df['Aeroporto Origem'] + " → " + df['Aeroporto Destino']
+ocupacao_rota = df.groupby(['Companhia', 'Rota'])['Ocupação (%)'].mean().reset_index()
+ocupacao_rota_ordenado = ocupacao_rota.sort_values(by='Ocupação (%)', ascending=False)
+print("---Top 5 rotas mais eficientes por Ocupação Média---")
+print(ocupacao_rota_ordenado.head(5))
+print("-" * 30)
+
+
+df['Data'] = pd.to_datetime(df['Data'])
+df['Mês'] = df['Data'].dt.to_period('M').astype(str)
+passageiros_mensal = df.groupby(['Companhia', 'Mês'])['Passageiros'].sum().reset_index()
+print("---Evolução mensal do total de passageiros por companhia---")
+print(passageiros_mensal.head())
+print("-" * 30)
+
 
 
 plt.figure()
@@ -106,3 +139,21 @@ plt.figure()
 sns.heatmap(df[["Passageiros", "Distância (km)", "Ocupação (%)", "Receita (R$)"]].corr(), annot=True, cmap="coolwarm")
 plt.title("Mapa entre variaveis")
 plt.show()
+
+sns.barplot(data=receita_media, x='Aeroporto Origem', y='Receita Média (R$)', hue='Companhia')
+plt.title('Receita Média por Companhia e Aeroporto de Origem')
+plt.xlabel('Aeroporto de Origem')
+plt.ylabel('Receita Média (R$)')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()
+
+
+plt.figure(figsize=(10, 6))  
+sns.barplot(data=ocupacao_media, x='Companhia', y='Ocupação Média (%)', palette='viridis')
+plt.title('Ocupação Média (%) por Companhia')
+plt.xlabel('Companhia')                        
+plt.ylabel('Ocupação Média (%)')              
+plt.xticks(rotation=45)  
+plt.tight_layout()      
+plt.show() 
