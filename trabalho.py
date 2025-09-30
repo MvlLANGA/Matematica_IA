@@ -157,3 +157,13 @@ plt.ylabel('Ocupação Média (%)')
 plt.xticks(rotation=45)  
 plt.tight_layout()      
 plt.show() 
+
+
+plt.figure(figsize=(14, 6))
+sns.lineplot(data=passageiros_mensal, x='Mês', y='Passageiros', hue='Companhia', marker='o')
+plt.title('Evolução Mensal do Total de Passageiros por Companhia')
+plt.xlabel('Mês')
+plt.ylabel('Número de Passageiros')
+plt.xticks(rotation=45)
+plt.tight_layout()
+plt.show()

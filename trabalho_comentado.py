@@ -190,4 +190,26 @@ plt.xticks(rotation=45)  # Rotaciona os nomes das companhias para melhor leitura
 plt.tight_layout()       # Ajusta o layout para não cortar nada
 plt.show()               # Exibe o gráfico
 
+
+
+# Define o tamanho da figura
+plt.figure(figsize=(14, 6))
+# Cria o gráfico de linha
+sns.lineplot(data=passageiros_mensal, x='Mês', y='Passageiros', hue='Companhia', marker='o')
+# Ajustes do gráfico
+plt.title('Evolução Mensal do Total de Passageiros por Companhia')
+plt.xlabel('Mês')
+plt.ylabel('Número de Passageiros')
+plt.xticks(rotation=45)
+plt.tight_layout()
+
+# Exibe o gráfico
+plt.show()
+
+
+
+
+
+
+
 # Heatmap mostrando a correlação entre as variáveis numéricas principais
